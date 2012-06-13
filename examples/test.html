@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type='text/javascript' src='../../js/nourl.js'></script>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+  var settings = {
+    host: "test.dev",
+    port: 80,
+    require: ["user", "post"]
+  }
+
+  nourl.run(settings, function(){
+
+     user.get('john', function(result) {
+        console.log(result);
+     });
+
+     math.sum(1,2, function(result){
+        console.log(result);
+     });
+
+  }); 
+
+</script>
+
+</body>
+</html>
