@@ -115,11 +115,20 @@ nourl.Ajax = {
 
   send: function(message, callback) {
     var client = new XMLHttpRequest();
-    client.open('POST', nourl.Ajax.rpcUrl, false);
+
+    params = "rpc_string=" + JSON.stringify(message);
+
+    client.open('POST', nourl.Ajax.rpcUrl, true);
+
+    //Send the proper header information along with the request
+    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    client.setRequestHeader("Content-length", params.length);
+    client.setRequestHeader("Connection", "close");
+
     client.onreadystatechange = function() {
       callback(client.responseText);
     }
 
-    client.send(null);
+    client.send(params);
   }
 }
