@@ -55,7 +55,7 @@ var nourl = {
 
   // create stubs for an array of classes
   requireList: function(list, callback) {  
-    nourl.rpc_exec('nourl.rpc_white_list_for', [list], function(stub){
+    nourl.rpc_exec('Nourl.rpc_white_list_for', [list], function(stub){
       stub = stub || {result:[]}
 
       //create stubs for methods
@@ -90,6 +90,7 @@ var nourl = {
   rpc_exec: function(method_name, params, callback) {
     nourl.send(
        nourl.json_rpc_format(method_name, params, nourl.rpc_id()), function(message) {
+         if (typeof message == "string") message = JSON.parse(message);
 
          if (message.error) throw method_name + ": " + message.error;
 

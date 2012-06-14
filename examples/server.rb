@@ -3,6 +3,7 @@ require '../ruby/nourl.rb'
 require 'user.rb'
 
 post '/rpc' do
-  # Nourl.proccess(params)
-  "#{params.inspect}"
+  rpc_string = JSON.parse(params['rpc_string'])
+  result = Nourl.proccess(rpc_string)
+  result.to_json
 end

@@ -11,14 +11,14 @@
   var settings = {
     rpcUrl: "http://nourl.dev/rpc",
     transport: "ajax",
-    require: ["user", "post"]
+    require: ["user"]
   }
 
   nourl.run(settings, function(){
 
-     // user.get('john', function(result) {
-     //    console.log(result);
-     // });
+     user.get('john', function(result) {
+        console.log(result);
+     });
 
   }); 
 
