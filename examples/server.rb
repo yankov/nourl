@@ -1,5 +1,8 @@
 require 'sinatra'
+require '../ruby/nourl.rb'
+require 'user.rb'
 
-get '/hi' do
-  "Hello World!"
+post '/rpc' do
+  # Nourl.proccess(params)
+  "#{params.inspect}"
 end
