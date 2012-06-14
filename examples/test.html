@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type='text/javascript' src='../../js/nourl.js'></script>
+  <script type='text/javascript' src='../js/nourl.js'></script>
 </head>
 
 <body>
@@ -9,20 +9,20 @@
 <script type="text/javascript">
 
   var settings = {
-    host: "test.dev",
-    port: 80,
+    rpcUrl: "http://test.dev/nourl/rpc",
+    transport: "ajax",
     require: ["user", "post"]
   }
 
   nourl.run(settings, function(){
 
-     user.get('john', function(result) {
-        console.log(result);
-     });
+     // user.get('john', function(result) {
+     //    console.log(result);
+     // });
 
-     math.sum(1,2, function(result){
-        console.log(result);
-     });
+     // math.sum(1,2, function(result){
+     //    console.log(result);
+     // });
 
   }); 
 

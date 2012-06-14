@@ -1,11 +1,27 @@
 var nourl = {
+  init: function(settings, callback) {
+    if (settings.transport == undefined || settings.transport == 'ajax') {
+      nourl.Ajax.init(settings);
+    } else {
+      throw "Doesn't support " + settings.transport;
+    }
+
+    callback();
+  },
+
+  rpc_id: function() {
+    id = typeof(id) != "undefined" ? id : 0;
+    return id += 1;
+  },
+
   run: function(settings, callback) {
     
-    nourl.settings = settings;
+    this.settings = settings;
 
-    // vertx.connect(settings.host, settings.port, function() {
-    //   nourl.requireList(settings.require, callback)
-    // });
+    this.init(settings, function(){
+      nourl.requireList(settings.require, callback)
+    });
+    
   },
 
   // function that creates stubs for methods of the required class
@@ -72,9 +88,8 @@ var nourl = {
 
   // sends json-rpc formatted string to an eventbus through sockjs
   rpc_exec: function(method_name, params, callback) {
-    vertx.connection.send(
-       vertx.eventbus_channel, 
-       nourl.json_rpc_format(method_name, params, vertx.rpc_id()), function(message) {
+    nourl.send(
+       nourl.json_rpc_format(method_name, params, nourl.rpc_id()), function(message) {
 
          if (message.error) throw method_name + ": " + message.error;
 
@@ -91,3 +106,20 @@ var nourl = {
   }
 }
 
+
+nourl.Ajax = {
+  init: function(settings) {
+    this.rpcUrl = settings.rpcUrl;
+    nourl.send = this.send;
+  },
+
+  send: function(message, callback) {
+    var client = new XMLHttpRequest();
+    client.open('POST', nourl.Ajax.rpcUrl, false);
+    client.onreadystatechange = function() {
+      callback(client.responseText);
+    }
+
+    client.send(null);
+  }
+}
