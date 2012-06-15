@@ -1,5 +1,5 @@
 require 'sinatra'
-require '../ruby/nourl.rb'
+require '../server/lib/nourl.rb'
 require 'user.rb'
 
 post '/rpc' do

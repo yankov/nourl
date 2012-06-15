@@ -1,7 +1,7 @@
 class User
   include Nourl::RPCable
 
-  allow_rpc_for :get
+  allow_rpc_for :get, :save
 
   class << self
 
@@ -9,7 +9,7 @@ class User
       "User #{name}"
     end
 
-    def write(name)
+    def save(name)
       "saved a user #{name}"
     end
 

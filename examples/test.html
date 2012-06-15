@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type='text/javascript' src='../js/nourl.js'></script>
+  <script type='text/javascript' src='../client/nourl.js'></script>
 </head>
 
 <body>
@@ -17,6 +17,10 @@
   nourl.run(settings, function(){
 
      user.get('blah', function(result) {
+        console.log(result);
+     });
+
+     user.save('zorro', function(result) {
         console.log(result);
      });
 
