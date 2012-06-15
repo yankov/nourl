@@ -16,26 +16,27 @@ module Nourl
       false
     end
 
-    def proccess(rpc_string)
+    def proccess(params)
+      rpc_string = JSON.parse(params['rpc_string'])
       class_name, method = rpc_string['method'].split(".")
       klass = Object.const_get(class_name.capitalize)
 
-      begin 
-        params = rpc_string['params']
+    
+      params = rpc_string['params']
 
-        raise "No access to call #{klass.to_s}.#{method}." unless Nourl.can_call?(klass, method)
+      raise "No access to call #{klass.to_s}.#{method}." unless Nourl.can_call?(klass, method)
 
-        #TODO: find a sexy way to do this 
-        result = if params.is_a?(Array)
-          klass.send(method, *params.compact)
-        else
-          klass.send(method, params)
-        end
-
-        json_rpc_format(result, nil, rpc_string['id'])
-      rescue => e
-        json_rpc_format(nil, e.message, rpc_string['id'])
+      #TODO: find a sexy way to do this 
+      result = if params.is_a?(Array)
+        klass.send(method, *params.compact)
+      else
+        klass.send(method, params)
       end
+
+      json_rpc_format(result, nil, rpc_string['id'])
+    rescue => e
+      json_rpc_format(nil, e.message, rpc_string['id'])
+      
     end
 
     def json_rpc_format(result, error, id)
