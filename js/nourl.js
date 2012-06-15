@@ -90,7 +90,10 @@ var nourl = {
   rpc_exec: function(method_name, params, callback) {
     nourl.send(
        nourl.json_rpc_format(method_name, params, nourl.rpc_id()), function(message) {
-         if (typeof message == "string") message = JSON.parse(message);
+
+         if (typeof message == "string") { 
+            message = JSON.parse(message);
+         }
 
          if (message.error) throw method_name + ": " + message.error;
 
@@ -119,7 +122,7 @@ nourl.Ajax = {
 
     params = "rpc_string=" + JSON.stringify(message);
 
-    client.open('POST', nourl.Ajax.rpcUrl, true);
+    client.open('POST', nourl.Ajax.rpcUrl, false);
 
     //Send the proper header information along with the request
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
