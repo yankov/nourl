@@ -39,8 +39,7 @@ Then you can run an example server.rb from example folder:
 `ruby -rubygems server.rb`
 
 To use server.rb from examples you may need to install sinatra first: `gem install sinatra`, but 
-it's easy to build your own server. You just have to have a /rpc endpoint, pass parameters to to Nourl.exec
-and respond with the json string.
+it's easy to build your own server using Rails or whatever you like. You just have to have a /rpc endpoint, pass parameters to to Nourl.exec and respond with the json string.
 
 You can include your classes that you want to provide RPC access to in server.rb.  
 Then include Nourl::RPCable in your class and list methods that allowed for remote calls.
