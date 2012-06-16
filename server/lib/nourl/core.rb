@@ -2,6 +2,8 @@ module Nourl
 
   class << self
     def rpc_white_list_for(class_list)
+      class_list = [class_list] unless class_list.is_a?(Array)
+
       class_list.inject({}) do |list, class_name|
         klass = Object.const_get(class_name.capitalize)
 
@@ -16,11 +18,10 @@ module Nourl
       false
     end
 
-    def proccess(params)
+    def exec(params)
       rpc_string = JSON.parse(params['rpc_string'])
       class_name, method = rpc_string['method'].split(".")
       klass = Object.const_get(class_name.capitalize)
-
     
       params = rpc_string['params']
 
@@ -36,7 +37,6 @@ module Nourl
       json_rpc_format(result, nil, rpc_string['id'])
     rescue => e
       json_rpc_format(nil, e.message, rpc_string['id'])
-      
     end
 
     def json_rpc_format(result, error, id)

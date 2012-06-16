@@ -4,6 +4,6 @@ require '../server/lib/nourl.rb'
 require 'user.rb'
 
 post '/rpc' do
-  result = Nourl.proccess(params)
+  result = Nourl.exec(params)
   result.to_json
 end
