@@ -12,31 +12,30 @@ them as if they were defined in javascript.
 -------
 So, say, on your backend side you have a model `User` with the method `get`.
 
-  class User
-    def self.get(name)
-      User.find_by_name(name)
+    class User
+      def self.get(name)
+        User.find_by_name(name)
+      end
     end
-  end
 
 Now, from my client JS I want to be able to call user.get without making any API calls,
 creating controllers and dealing with RPC manually. I works just like this:
 
-  user.get("John", function(result) {
-    console.log(result);
-  })
+    user.get("John", function(result) {
+      console.log(result);
+    })
 
 That's it.
 
 How to use it
 -------------
 
-`gem install nourl`
-
+`gem install nourl`  
 `git clone https://github.com/yankov/nourl.git`
 
 Then you can run an example server.rb from example folder:
 
-`cd ./nourl/examples`
+`cd ./nourl/examples`  
 `ruby -rubygems server.rb`
 
 
