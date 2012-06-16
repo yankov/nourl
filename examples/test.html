@@ -9,14 +9,14 @@
 <script type="text/javascript">
 
   var settings = {
-    rpcUrl: "http://nourl.dev/rpc",
+    rpcUrl: "http://0.0.0.0:4567/rpc",
     transport: "ajax",
     require: ["user"]
   }
 
   nourl.run(settings, function(){
 
-     user.get('blah', function(result) {
+     user.get('john', function(result) {
         console.log(result);
      });
 
