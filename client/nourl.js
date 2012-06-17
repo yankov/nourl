@@ -126,8 +126,6 @@ nourl.Ajax = {
 
     //Send the proper header information along with the request
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.setRequestHeader("Content-length", params.length);
-    client.setRequestHeader("Connection", "close");
 
     client.onreadystatechange = function() {
       callback(client.responseText);
